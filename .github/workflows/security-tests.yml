@@ -47,15 +47,5 @@ jobs:
           RAPHAEL_LIMITER_STORAGE: memory://
           RAPHAEL_DB_PATH: /tmp/raphael-ci.sqlite3
         run: pytest -q
-      - name: Commit refreshed hash lock when changed
-        working-directory: .
-        run: |
-          git add raphael/requirements.lock
-          if git diff --cached --quiet; then
-            echo "Dependency lock is already current."
-          else
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "chore: refresh SHA-256 dependency lock"
-            git push
-          fi
+      - name: Verify dependency lock is reproducible
+        run: git diff --exit-code -- requirements.lock
