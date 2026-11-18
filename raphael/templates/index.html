@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>Raphael</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<button id="sidebar-toggle" class="sidebar-toggle" aria-label="Abrir conversaciones" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
+<div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-head">
+    <svg class="glyph" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1"/>
+      <path d="M20 6 L20 34 M6 20 L34 20" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+      <path d="M20 11 L25 20 L20 29 L15 20 Z" fill="currentColor"/>
+    </svg>
+    <span class="brand-name">Raphael</span>
+  </div>
+
+  <button id="new-chat" class="new-chat-btn">
+    <span class="plus">+</span> Nueva conversación
+  </button>
+
+  <nav id="conversation-list" class="conversation-list" aria-label="Conversaciones"></nav>
+</aside>
+
+<main class="chat-main">
+  <div id="voice-aura" class="voice-aura" aria-hidden="true">
+    <div class="magic-ring magic-ring--outer"></div>
+    <div class="magic-ring magic-ring--middle"></div>
+    <div class="magic-ring magic-ring--inner"></div>
+    <div class="magic-diamond magic-diamond--a"></div>
+    <div class="magic-diamond magic-diamond--b"></div>
+    <div class="magic-axis magic-axis--vertical"></div>
+    <div class="magic-axis magic-axis--horizontal"></div>
+    <div class="magic-core"></div>
+  </div>
+
+  <header class="header">
+    <p class="eyebrow">tu guía para el día a día</p>
+    <a class="memory-header-link" href="/memories">Gestionar memoria</a>
+  </header>
+
+  <div class="chat-shell">
+    <div id="messages" class="messages"></div>
+  </div>
+
+  <form id="chat-form" class="composer" autocomplete="off">
+    <input id="attachment-input" type="file" accept=".pdf,.docx,.txt,.jpg,.jpeg,.png,.webp,.zip,.pptx,.csv,.xlsx" multiple hidden />
+    <button id="attachment-toggle" class="attachment-toggle" type="button" aria-label="Adjuntar archivos" title="Adjuntar archivos">
+      <i data-lucide="paperclip" aria-hidden="true"></i><span>Adjuntar</span>
+    </button>
+    <input
+      id="chat-input"
+      type="text"
+      placeholder="Escribe lo que necesitas..."
+      aria-label="Mensaje para Raphael"
+    />
+    <button
+      id="voice-toggle"
+      class="voice-toggle"
+      type="button"
+      aria-label="Activar voz"
+      aria-pressed="false"
+      title="Activar voz"
+    >
+      <i data-lucide="mic" aria-hidden="true"></i>
+      <span>Voz</span>
+    </button>
+    <button class="send-btn" type="submit" aria-label="Enviar mensaje" title="Enviar">
+      <i data-lucide="send-horizontal" aria-hidden="true"></i>
+      <span>Enviar</span>
+    </button>
+    <div class="lantern-line" aria-hidden="true"></div>
+    <div id="attachment-preview" class="attachment-preview" aria-live="polite"></div>
+  </form>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.7/purify.min.js"></script>
+<script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

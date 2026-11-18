@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>Memoria · Raphael</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='memories.css') }}">
+</head>
+<body class="memory-page">
+<aside class="sidebar memory-sidebar">
+  <div class="sidebar-head"><span class="brand-name">Raphael</span></div>
+  <a class="memory-nav-link" href="/">← Volver al chat</a>
+  <div class="memory-sidebar-note">CENTRO DE CONTROL</div>
+  <div class="memory-sidebar-active">Memoria</div>
+  <div class="memory-sidebar-bottom">Solo visible para el propietario autenticado.</div>
+</aside>
+<main class="memory-main">
+  <header class="memory-header">
+    <div><p class="eyebrow">RAPHAEL / PERSONALIZACIÓN</p><h1>Memoria</h1><p class="memory-subtitle">Controla qué recuerda Raphael y qué información utiliza en sus respuestas.</p></div>
+    <a class="memory-back-mobile" href="/">Volver al chat</a>
+  </header>
+  <section class="memory-stats" aria-label="Resumen de recuerdos">
+    <article><span id="count-active">—</span><small>Activos</small></article>
+    <article><span id="count-pending">—</span><small>Pendientes</small></article>
+    <article><span id="count-total">—</span><small>Total</small></article>
+  </section>
+  <section class="memory-create panel">
+    <div><h2>Añadir recuerdo</h2><p>Los recuerdos que añadas aquí quedarán activos inmediatamente.</p></div>
+    <form id="memory-form">
+      <label for="memory-fact">¿Qué debería recordar Raphael?</label>
+      <textarea id="memory-fact" maxlength="2000" required placeholder="Ej.: Prefiero que Raphael responda en español y vaya directo al punto."></textarea>
+      <div class="memory-form-row">
+        <select id="memory-category" aria-label="Categoría">
+          <option value="personal">Personal</option><option value="project">Proyecto</option><option value="contextual">Contextual</option><option value="decision">Decisión</option><option value="general">General</option>
+        </select>
+        <button class="memory-primary" type="submit">Guardar recuerdo</button>
+      </div>
+    </form>
+  </section>
+  <section class="memory-list-section">
+    <div class="memory-list-heading"><div><h2>Actualizaciones propuestas</h2><p>Las sustituciones requieren tu aprobación. El recuerdo original se conserva para revisión.</p></div></div>
+    <button id="semantic-review-button" type="button" class="memory-quiet">Analizar posible contradicción con Claude</button>
+    <div id="proposal-list" class="memory-list" aria-live="polite"><div class="memory-empty">Cargando propuestas…</div></div>
+  </section>
+  <section class="memory-list-section">
+    <div class="memory-list-heading"><div><h2>Tus recuerdos</h2><p>Las sugerencias de Claude necesitan tu aprobación antes de usarse.</p></div>
+      <select id="memory-filter" aria-label="Filtrar recuerdos"><option value="all">Todos</option><option value="active">Activos</option><option value="pending">Pendientes</option></select>
+    </div>
+    <div id="memory-list" class="memory-list" aria-live="polite"><div class="memory-empty">Cargando recuerdos…</div></div>
+    <p id="memory-status" class="memory-status" role="status"></p>
+  </section>
+</main>
+<script src="{{ url_for('static', filename='memories.js') }}"></script>
+</body>
+</html>

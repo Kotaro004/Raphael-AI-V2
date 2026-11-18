@@ -1,0 +1,115 @@
+.memory-page { min-height: 100vh; }
+.memory-sidebar { position: relative; }
+.memory-nav-link { color: var(--text-muted); text-decoration: none; padding: 10px 12px; border-radius: 8px; }
+.memory-nav-link:hover { background: var(--bg-elevated); color: var(--text-light); }
+.memory-sidebar-note { margin: 34px 10px 8px; color: var(--text-muted); font-size: .66rem; letter-spacing: .14em; }
+.memory-sidebar-active { padding: 12px; border-left: 2px solid var(--accent-gold); background: var(--bg-elevated); border-radius: 7px; }
+.memory-sidebar-bottom { margin-top: auto; padding: 12px 8px; color: var(--text-muted); font-size: .75rem; line-height: 1.5; }
+.memory-main { flex: 1; min-width: 0; max-width: 1100px; margin: 0 auto; padding: 42px clamp(20px, 5vw, 64px) 64px; }
+.memory-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+.memory-header h1 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.3rem); font-weight: 400; margin: 10px 0 8px; }
+.memory-subtitle, .memory-create p, .memory-list-heading p { color: var(--text-muted); line-height: 1.55; margin: 0; }
+.memory-back-mobile { display: none; color: var(--accent-gold); text-decoration: none; }
+.memory-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 30px 0 22px; }
+.memory-stats article, .panel, .memory-card { background: var(--bg-panel); border: 1px solid var(--hairline); border-radius: 14px; }
+.memory-stats article { padding: 17px 20px; display: flex; flex-direction: column; gap: 4px; }
+.memory-stats article span { font-family: 'Fraunces', serif; font-size: 1.9rem; }
+.memory-stats article small { color: var(--text-muted); }
+.memory-create { padding: 22px; }
+.memory-create h2, .memory-list-heading h2 { margin: 0 0 6px; font-size: 1.12rem; }
+.memory-create form { margin-top: 20px; display: flex; flex-direction: column; gap: 9px; }
+.memory-create label { color: var(--text-muted); font-size: .84rem; }
+.memory-create textarea { width: 100%; min-height: 92px; resize: vertical; border: 1px solid var(--hairline); border-radius: 10px; padding: 13px; background: var(--bg-base); color: var(--text-light); font: inherit; }
+.memory-create textarea:focus, .memory-form-row select:focus, .memory-list-heading select:focus { outline: 2px solid var(--accent-gold); outline-offset: 2px; }
+.memory-form-row { display: flex; justify-content: flex-end; gap: 10px; }
+.memory-form-row select, .memory-list-heading select { background: var(--bg-base); border: 1px solid var(--hairline); color: var(--text-light); border-radius: 9px; padding: 10px 12px; font: inherit; }
+.memory-primary, .memory-quiet, .memory-danger { border-radius: 9px; padding: 10px 14px; border: 1px solid transparent; font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer; }
+.memory-primary { background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral)); color: var(--bg-base); }
+.memory-primary:hover, .memory-quiet:hover, .memory-danger:hover { filter: brightness(1.08); }
+.memory-quiet { background: var(--bg-elevated); color: var(--text-light); border-color: var(--hairline); }
+.memory-danger { background: transparent; color: #ff9a8d; border-color: rgba(255,154,141,.3); }
+.memory-list-section { margin-top: 34px; }
+.memory-list-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.memory-list { display: grid; gap: 12px; }
+.memory-card { padding: 18px 20px; }
+.memory-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.memory-category { color: var(--accent-gold); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; }
+.memory-state { font-size: .72rem; border-radius: 999px; padding: 5px 9px; background: rgba(227,178,60,.12); color: var(--accent-gold); }
+.memory-state.active { background: rgba(103,217,135,.12); color: var(--accent-emerald); }
+.memory-fact { margin: 14px 0 10px; line-height: 1.55; overflow-wrap: anywhere; }
+.memory-meta { color: var(--text-muted); font-size: .72rem; margin: 0; }
+.memory-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+.memory-primary.small { padding: 8px 12px; }
+.memory-empty { text-align: center; padding: 36px 18px; border: 1px dashed var(--hairline); border-radius: 12px; color: var(--text-muted); }
+.memory-status { min-height: 1.4em; color: var(--accent-emerald); font-size: .84rem; }
+.memory-status.is-error { color: #ff9a8d; }
+@media (max-width: 768px) {
+  .memory-sidebar { display: none; }
+  .memory-main { padding: 26px 16px 44px; }
+  .memory-back-mobile { display: inline-block; }
+}
+@media (max-width: 520px) {
+  .memory-header { flex-direction: column; }
+  .memory-stats { gap: 8px; }
+  .memory-stats article { padding: 13px; }
+  .memory-stats article span { font-size: 1.55rem; }
+  .memory-form-row { flex-direction: column; }
+  .memory-form-row select, .memory-form-row button { width: 100%; min-height: 44px; }
+  .memory-list-heading { align-items: flex-start; flex-direction: column; }
+  .memory-list-heading select { width: 100%; }
+  .memory-card { padding: 15px; }
+  .memory-actions > button { flex: 1 1 auto; }
+}
+
+/* ---------- Corrección de scroll en el centro de memoria ---------- */
+/* Esta vista tiene contenido de longitud variable: el documento, no un
+   contenedor interno de altura fija, debe controlar el desplazamiento. */
+html:has(body.memory-page) {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.memory-page {
+  display: flex;
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  align-items: stretch;
+  overscroll-behavior-y: auto;
+}
+
+.memory-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  height: 100dvh;
+  flex: 0 0 260px;
+}
+
+.memory-main {
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex: 1 0 0;
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  body.memory-page {
+    display: block;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .memory-main {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: max(48px, calc(32px + env(safe-area-inset-bottom)));
+  }
+}
